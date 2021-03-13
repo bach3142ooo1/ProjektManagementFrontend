@@ -1,0 +1,37 @@
+<div class="row mt-3 mx-3" *ngIf="board">
+    <div class="col-1 mx-3 border border-dark rounded" style="background-color:#ebecf0; height: max-content;"
+        *ngFor="let column of board.columns">
+        <h5 class="border-bottom border-dark">{{column.name}}</h5>
+        <div class="wrapper">
+            <div class="ticket-holder my-2 border border-dark rounded" style="background-color: white"
+                *ngFor="let ticket of column.tickets">
+                <input class="input-title-holder" name="{{ticket.ticketId}}" (click)="onClickTitle($event)" (keyup.enter)="saveChange($event)"
+                    value="{{ticket.title}}" (focusout)="onOutTitle($event)"  readonly>
+            </div>
+        </div>
+        <div class="footer active" (click)="onClick($event)">
+            <a href="#">
+                <span class="mr-5 newTicket">Add new ticket</span>
+            </a>
+            <i class="bi bi-plus bi-lg " style="float:right">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                    viewBox="0 0 16 16">
+                    <path
+                        d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                </svg>
+            </i>
+            <input type="text" *ngIf="board" class="ticketName" name="{{column.id}}" (focusout)="onOut($event)"
+                (keyup.enter)="onEnter($event)">
+        </div>
+    </div>
+    <div class="col-2 mx-2 border border-dark rounded" style="background-color:#ebecf0; height: max-content;">
+        <a href="#" id="addCol"><span>Add new Column</span></a>
+        <i class="bi bi-plus bi-lg ">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus"
+                viewBox="0 0 16 16">
+                <path
+                    d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+            </svg>
+        </i>
+    </div>
+</div>
