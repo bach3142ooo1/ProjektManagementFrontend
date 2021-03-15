@@ -17,13 +17,22 @@ export class ManagementService {
     return this.http.get<IBoard>(this.baseurl + 'board/' + id).pipe();
   }
 
-  addTicket(colId: number, title: string, description: string): Observable<ITicket> {
+  getTicket(ticketId: number): Observable<ITicket>{
+    return this.http.get<ITicket>(this.baseurl + 'Ticket/' + ticketId).pipe();
+  }
+
+  addTicket(
+    colId: number,
+    title: string,
+    description: string
+  ): Observable<ITicket> {
     return this.http
       .post<any>(
         this.baseurl +
           `Ticket/Add/colId=${colId},title=\'${title}\',description=\'${description}\'`,
         undefined
-      ).pipe();
+      )
+      .pipe();
   }
 
   // tslint:disable-next-line: typedef
@@ -32,6 +41,18 @@ export class ManagementService {
       .put<any>(
         this.baseurl + `Ticket/Edit/ticketId=${ticketId},title=\'${title}\'`,
         undefined
-      ).pipe();
+      )
+      .pipe();
   }
+
+  deleteTicket(ticketId: number): any {
+    return this.http
+      .delete<any>(
+        this.baseurl + `Ticket/Delete/ticketId=${ticketId}`,
+        undefined
+      )
+      .pipe();
+  }
+
+
 }

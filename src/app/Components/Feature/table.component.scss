@@ -2,6 +2,10 @@ a {
   text-decoration: none;
 }
 
+.delete-link,.detail-view{
+  width: 30%;
+}
+
 .ticketName {
   visibility: hidden;
   position: relative;
@@ -11,6 +15,7 @@ a {
 .ticket-holder{
     width: 100%;
     height: 30px;
+    display: flex;
 }
 
 .title-holder{
@@ -19,4 +24,8 @@ a {
 
 .input-title-holder{
   width: 100%;
+}
+
+button{
+  width: 30%;
 }

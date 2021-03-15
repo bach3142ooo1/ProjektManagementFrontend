@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class TableComponent implements OnInit {
   board: IBoard;
   columns: IColumn[];
+  mySubscription: any;
 
   constructor(private managementService: ManagementService) {}
   ngOnInit(): void {
@@ -21,6 +22,7 @@ export class TableComponent implements OnInit {
   }
 
   getBoardById(id: number): void {
+    // tslint:disable-next-line: deprecation
     this.managementService.getBoardbyId(id).subscribe(
       (res) => {
         this.board = res;
@@ -52,9 +54,12 @@ export class TableComponent implements OnInit {
     const colId = parseInt(event.target.name);
     const title = event.target.value;
     const description = 'test';
-    if ((await this.managementService.addTicket(colId, title, description).subscribe()).closed){
-      this.getBoardById(1);
-    }
+    this.managementService
+      .addTicket(colId, title, description)
+      // tslint:disable-next-line: deprecation
+      .subscribe((response) => {
+        this.getBoardById(1);
+      });
     event.target.blur();
   }
 
@@ -70,13 +75,21 @@ export class TableComponent implements OnInit {
 
   async saveChange(event): Promise<any> {
     // tslint:disable-next-line: radix
-    console.log(event.target);
     // tslint:disable-next-line: radix
     const id = parseInt(event.target.name);
     const title = event.target.value;
-    if ((await this.managementService.editTicket(id, title).subscribe()).closed){
+    this.managementService.editTicket(id, title).subscribe((response) => {
       this.getBoardById(1);
-    }
+    });
+  }
 
+  // tslint:disable-next-line: typedef
+  async onDelete(event) {
+    console.log(event.target);
+    // tslint:disable-next-line: radix
+    const id = parseInt(event.target.parentElement.parentElement.title);
+    await this.managementService.deleteTicket(id).subscribe((response) => {
+      this.getBoardById(1);
+    });
   }
 }

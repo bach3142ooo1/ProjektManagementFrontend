@@ -1,0 +1,28 @@
+<div class="container" style="margin-top: 2%;" *ngIf="ticket">
+    <input class="title-holder" value="{{ticket.title}}" readonly>
+    <hr>
+    <div class ="Detail">
+        <div class="tasks-holder">
+            <span style="font-size: 30px">Tasks</span>
+            <hr>
+            <ul *ngFor="let task of ticket.tasks">
+                <li>{{task.title}}</li>
+            </ul>
+            <div>
+                <a href="#">Add new task</a>
+                <input class="task-input" value="Add new Task">
+            </div>
+        </div>
+        <br>
+        <div class= "description-holder">
+            <span style="font-size: 30px">Description</span>
+            <hr>
+            <textarea>{{ticket.description}}</textarea>
+        </div>
+    </div>
+    <br>
+    <div class ="footer">
+        <button style="float: Left">Save</button>
+        <button style="float: Right">Back to board</button>
+    </div>
+</div>
