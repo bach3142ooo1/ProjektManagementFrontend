@@ -9,20 +9,20 @@
                 <li>{{task.title}}</li>
             </ul>
             <div>
-                <a href="#">Add new task</a>
-                <input class="task-input" value="Add new Task">
+                <button (click)="addTaskInit($event)" >Add new task</button>
+                <input class="task-input" value="Add new Task" (focus) ="onFocus($event)" (focusout) ="onOutFocus($event)"  (keyup.enter)="onAddTask(ticket.ticketId,$event)">
             </div>
         </div>
         <br>
         <div class= "description-holder">
             <span style="font-size: 30px">Description</span>
             <hr>
-            <textarea>{{ticket.description}}</textarea>
+            <textarea class="description">{{ticket.description}}</textarea>
         </div>
     </div>
     <br>
     <div class ="footer">
-        <button style="float: Left">Save</button>
+        <button style="float: Left" (click) = "onSave()">Save</button>
         <button style="float: Right">Back to board</button>
     </div>
 </div>
